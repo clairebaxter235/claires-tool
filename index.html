@@ -17,13 +17,19 @@
 
       <section class="panel" aria-labelledby="search-title">
         <h2 id="search-title">Search</h2>
-        <form id="search-form" class="search-form">
-          <label for="query">eBay query</label>
-          <div class="search-row">
-            <input id="query" name="query" type="search" autocomplete="off" placeholder="Vintage Coach bag" required>
-            <button type="submit">Generate</button>
-          </div>
-        </form>
+        <div id="search-form" class="search-form">
+
+  <label for="query">eBay query</label>
+
+  <div class="search-row">
+
+    <input id="query" name="query" type="search" autocomplete="off" placeholder="Vintage Coach bag">
+
+    <button id="generate-button" type="button">Generate</button>
+
+  </div>
+
+</div>
 
         <div class="link-actions" aria-label="eBay listing links">
           <a id="active-link" class="button secondary disabled" href="#" target="_blank" rel="noopener">Open Active Listings</a>
