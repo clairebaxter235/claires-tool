@@ -130,9 +130,10 @@ function updateSellThroughRate() {
   }
 }
 
-form.addEventListener("submit", (event) => {
-  event.preventDefault();
-  generateLinks(queryInput.value);
+const generateButton = document.querySelector(”#generate-button”);
+
+generateButton.addEventListener(“click”, () => {
+generateLinks(queryInput.value);
 });
 
 queryInput.addEventListener("input", () => {
