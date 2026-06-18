@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#f7f3ec">
+    <title>Claire's eBay Checker</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main class="app">
+      <section class="header">
+        <p class="eyebrow">Thrift sourcing helper</p>
+        <h1>Claire's eBay Checker</h1>
+        <p class="intro">Search eBay, compare active vs. sold listings, and get a quick sell-through verdict.</p>
+      </section>
+
+      <section class="panel" aria-labelledby="search-title">
+        <h2 id="search-title">Search</h2>
+        <form id="search-form" class="search-form">
+          <label for="query">eBay query</label>
+          <div class="search-row">
+            <input id="query" name="query" type="search" autocomplete="off" placeholder="Vintage Coach bag" required>
+            <button type="submit">Generate</button>
+          </div>
+        </form>
+
+        <div class="link-actions" aria-label="eBay listing links">
+          <a id="active-link" class="button secondary disabled" href="#" target="_blank" rel="noopener">Open Active Listings</a>
+          <a id="sold-link" class="button secondary disabled" href="#" target="_blank" rel="noopener">Open Sold Listings</a>
+        </div>
+        <p id="link-status" class="status" role="status">Enter a query to create eBay links.</p>
+      </section>
+
+      <section class="panel" aria-labelledby="rate-title">
+        <h2 id="rate-title">Sell-Through Rate</h2>
+        <div class="count-grid">
+          <label>
+            <span>Active listings</span>
+            <input id="active-count" type="number" inputmode="numeric" min="0" placeholder="active_count">
+          </label>
+          <label>
+            <span>Sold listings</span>
+            <input id="sold-count" type="number" inputmode="numeric" min="0" placeholder="sold_count">
+          </label>
+        </div>
+
+        <div class="result" aria-live="polite">
+          <div>
+            <p class="result-label">Sell-through rate</p>
+            <p id="rate-value" class="rate-value">--</p>
+          </div>
+          <div>
+            <p class="result-label">Verdict</p>
+            <p id="verdict" class="verdict muted">Add counts</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel" aria-labelledby="recent-title">
+        <div class="recent-header">
+          <h2 id="recent-title">Recent Searches</h2>
+          <button id="clear-recent" class="text-button" type="button">Clear</button>
+        </div>
+        <div id="recent-searches" class="recent-list" aria-live="polite"></div>
+      </section>
+
+      <section class="instructions" aria-labelledby="setup-title">
+        <h2 id="setup-title">Setup</h2>
+        <p>Save these files in one folder and open <strong>index.html</strong> in a browser, or upload the folder to any static host.</p>
+        <ol>
+          <li>GitHub Pages: create a GitHub repo, upload <strong>index.html</strong>, <strong>styles.css</strong>, and <strong>script.js</strong>, then enable Pages from the repo settings.</li>
+          <li>Netlify, Vercel, or Render: create a new static site and upload or import the folder. No build command is needed.</li>
+          <li>From an iPhone: use the GitHub mobile app or github.com in Safari to upload the files, then enable GitHub Pages from the repository settings page.</li>
+        </ol>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
