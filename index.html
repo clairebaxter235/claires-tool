@@ -82,6 +82,96 @@
       </section>
     </main>
 
-    <script src="script.js"></script>
+    <script>
+  const queryInput = document.querySelector("#query");
+  const activeLink = document.querySelector("#active-link");
+  const soldLink = document.querySelector("#sold-link");
+  const linkStatus = document.querySelector("#link-status");
+  const activeCountInput = document.querySelector("#active-count");
+  const soldCountInput = document.querySelector("#sold-count");
+  const rateValue = document.querySelector("#rate-value");
+  const verdict = document.querySelector("#verdict");
+
+  function buildEbayUrls(query) {
+    const encodedQuery = encodeURIComponent(query.trim());
+    const baseUrl = `https://www.ebay.com/sch/i.html?_nkw=${encodedQuery}`;
+
+    return {
+      active: baseUrl,
+      sold: `${baseUrl}&LH_Sold=1&LH_Complete=1`
+    };
+  }
+
+  function generateLinks() {
+    const query = queryInput.value.trim();
+
+    if (!query) {
+      activeLink.href = "#";
+      soldLink.href = "#";
+      activeLink.classList.add("disabled");
+      soldLink.classList.add("disabled");
+      linkStatus.textContent = "Enter a query to create eBay links.";
+      return;
+    }
+
+    const urls = buildEbayUrls(query);
+
+    activeLink.href = urls.active;
+    soldLink.href = urls.sold;
+    activeLink.classList.remove("disabled");
+    soldLink.classList.remove("disabled");
+
+    linkStatus.textContent = `Links ready for "${query}". Tap Active or Sold.`;
+  }
+
+  function parseCount(value) {
+    return Number(String(value).replace(/,/g, ""));
+  }
+
+  function updateSellThroughRate() {
+    const activeCount = parseCount(activeCountInput.value);
+    const soldCount = parseCount(soldCountInput.value);
+
+    verdict.className = "verdict muted";
+
+    if (!activeCountInput.value || !soldCountInput.value) {
+      rateValue.textContent = "--";
+      verdict.textContent = "Add counts";
+      return;
+    }
+
+    if (activeCount <= 0) {
+      rateValue.textContent = "--";
+      verdict.textContent = "Active must be over 0";
+      return;
+    }
+
+    const rate = (soldCount / activeCount) * 100;
+    rateValue.textContent = `${rate.toFixed(1)}%`;
+
+    if (rate > 100) {
+      verdict.textContent = "Excellent demand";
+      verdict.className = "verdict excellent";
+    } else if (rate >= 50) {
+      verdict.textContent = "Good demand";
+      verdict.className = "verdict good";
+    } else if (rate >= 20) {
+      verdict.textContent = "Okay / be selective";
+      verdict.className = "verdict okay";
+    } else {
+      verdict.textContent = "Slow or saturated";
+      verdict.className = "verdict slow";
+    }
+  }
+
+  document.querySelector("#search-form").addEventListener("submit", function(event) {
+    event.preventDefault();
+    generateLinks();
+  });
+
+  activeCountInput.addEventListener("input", updateSellThroughRate);
+  soldCountInput.addEventListener("input", updateSellThroughRate);
+</script>
+
   </body>
 </html>
