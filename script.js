@@ -1,4 +1,3 @@
-```javascript
 const form = document.querySelector("#search-form");
 const queryInput = document.querySelector("#query");
 const activeLink = document.querySelector("#active-link");
